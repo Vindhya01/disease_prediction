@@ -4,8 +4,9 @@ import numpy as np
 import pandas as pd
 import requests
 from io import BytesIO
+from joblib import load
 
-# Function to load model from raw URL
+'''# Function to load model from raw URL
 def load_model(url):
     response = requests.get(url)
     if response.status_code == 200:
@@ -17,17 +18,15 @@ def load_model(url):
 # Function to load CSV files from raw URLs
 def load_csv(url):
     return pd.read_csv(url)
+'''
 
 # Load the model
-model_url = 'https://raw.githubusercontent.com/Vindhya01/disease_prediction/main/decision_tree_model.pkl'
-model = load_model(model_url)
+model = load('./decision_tree_model.joblib')
+
 
 # Load the disease description and precautions
-desc_url = "https://raw.githubusercontent.com/Vindhya01/disease_prediction/main/disease_symptom_dataset/symptom_description.csv"
-prec_url = "https://raw.githubusercontent.com/Vindhya01/disease_prediction/main/disease_symptom_dataset/symptom_precaution.csv"
-
-desc = load_csv(desc_url)
-prec = load_csv(prec_url)
+desc = load_csv("./disease_symptom_dataset//symptom_description.csv")
+prec = load_csv("./disease_symptom_dataset//symptom_precaution.csv")
 
 # List of diseases and symptoms (same as your existing lists)
 diseases = [
