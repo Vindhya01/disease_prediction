@@ -1,18 +1,18 @@
 import streamlit as st
+import pickle
 import numpy as np
 import pandas as pd
-from joblib import load
 
-# Function to load CSV files (local path)
-def load_csv(path):
-    return pd.read_csv(path)
+# Function to load CSV files from raw URLs
+def load_csv(url):
+    return pd.read_csv(url)
 
-# Load the model
-model = load('./decision_tree_model.joblib')
+# Load the model using pickle
+model = pickle.load(open('./decision_tree_model.pkl', 'rb'))
 
 # Load the disease description and precautions
-desc = load_csv("./disease_symptom_dataset/symptom_description.csv")
-prec = load_csv("./disease_symptom_dataset/symptom_precaution.csv")
+desc = load_csv("./disease_symptom_dataset//symptom_description.csv")
+prec = load_csv("./disease_symptom_dataset//symptom_precaution.csv")
 
 # List of diseases and symptoms (same as your existing lists)
 diseases = [
@@ -74,7 +74,7 @@ if st.button('Predict'):
     precautions = []
     if top_disease in prec["Disease"].unique():
         c = np.where(prec['Disease'] == top_disease)[0][0]
-        for j in range(1, len(prec.iloc[c])):
+        for j in range(1, len(prec.iloc[c])):  # Starting from index 1 to skip the 'Disease' column
             precautions.append(prec.iloc[c, j])
 
     # Display the result
