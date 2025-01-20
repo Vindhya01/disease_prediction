@@ -1,32 +1,18 @@
 import streamlit as st
-import pickle
 import numpy as np
 import pandas as pd
-import requests
-from io import BytesIO
 from joblib import load
 
-'''# Function to load model from raw URL
-def load_model(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return pickle.load(BytesIO(response.content))
-    else:
-        st.error(f"Failed to fetch the model. HTTP Status code: {response.status_code}")
-        return None
-
-# Function to load CSV files from raw URLs
-def load_csv(url):
-    return pd.read_csv(url)
-'''
+# Function to load CSV files (local path)
+def load_csv(path):
+    return pd.read_csv(path)
 
 # Load the model
 model = load('./decision_tree_model.joblib')
 
-
 # Load the disease description and precautions
-desc = load_csv("./disease_symptom_dataset//symptom_description.csv")
-prec = load_csv("./disease_symptom_dataset//symptom_precaution.csv")
+desc = load_csv("./disease_symptom_dataset/symptom_description.csv")
+prec = load_csv("./disease_symptom_dataset/symptom_precaution.csv")
 
 # List of diseases and symptoms (same as your existing lists)
 diseases = [
