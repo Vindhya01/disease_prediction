@@ -11,8 +11,8 @@ def load_csv(url):
 model = pickle.load(open('./decision_tree_model.pkl', 'rb'))
 
 # Load the disease description and precautions
-desc = load_csv("./disease_symptom_dataset//symptom_description.csv")
-prec = load_csv("./disease_symptom_dataset//symptom_precaution.csv")
+desc = pd.read_csv('./disease_symptom_dataset/symptom_description.csv')
+prec = pd.read_csv('./disease_symptom_dataset/symptom_precaution.csv')
 
 # List of diseases and symptoms (same as your existing lists)
 diseases = [
